@@ -35,7 +35,10 @@ const mutations ={
     }
 };
 const actions = {
-    getsonginfo:(context)=>{
+    getsonginfo:(context,sid)=>{
+        //第一件事，把点击的歌曲加入到列表中，并重置当前歌曲索引
+        context.commit('ilist',sid)
+        //第二，当前歌曲信息加入到信息当中
         const playurl = "/baidumusic/v1/restserver/ting?method=baidu.ting.song.play&songid="+state.playlist[state.currentIndex]
         axios.get(playurl)
             .then(res=>{

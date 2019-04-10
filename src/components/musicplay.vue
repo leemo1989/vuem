@@ -11,7 +11,10 @@
                     </div>
                     <h3>{{cinfo.title}}</h3>
                     <h4>{{cinfo.author}}</h4>
-                    <img :src="cinfo.pic_radio">
+                    <div class="cd">
+                        <img :src="cinfo.pic_radio">
+                    </div>
+
                 </div>
                 <div style="overflow: hidden;margin-bottom: 10px">{{clrc}}</div>
                     <div class="progress">
@@ -42,14 +45,19 @@
         </transition>
         <transition>
            <div class="mini-player" v-show="!fullScreen" @click="open">
+               <div class="icon">
+                   <img width="40" heoght="40" :src="cinfo.pic_small">
+               </div>
 				{{cinfo.title}}-{{cinfo.author}}
-				<button>list</button>
+				<button @click="showlist">list</button>
            </div>
         </transition>
+        <mlist ref="mlist"></mlist>
     </div>
 </template>
 
 <script>
+    import mlist from '@/components/mlist'
 export default {
     name:"Musicplay",
     data(){
@@ -61,16 +69,24 @@ export default {
             clrc:'',
         };
     },
+    components:{
+        mlist
+    },
     watch:{
      playing(newPlaying){
         const audio = this.$refs.audio
         this.$nextTick(() => { //确保DOM已存在
             newPlaying ? audio.play() : audio.pause()
         })
-      }
+      },
+    },
+    created(){
+        console.log('start--------------------')
     },
     methods:{
-
+        showlist(){
+            this.$refs.mlist.show()
+        },
       ready() {
           console.log(888)
           this.songReady = false
@@ -115,7 +131,6 @@ export default {
             return this.$store.state.fullScreen
         },
         cinfo:function(){
-            console.log(this.$store.dispatch('getsonginfo'),9999)
             return this.$store.getters.cinfo
         }
     }
@@ -184,4 +199,37 @@ export default {
         padding: 10px 0
 
     }
+    .cd {
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        border: 10px solid rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        animation: lds-hourglass 1.2s linear infinite;
+    }
+    .cd img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+    }
+      .icon {
+          flex: 0 0 40px;
+          width: 40px;
+          padding: 0 10px 0 20px img;
+          border-radius: 50%;
+          animation: lds-hourglass 10s linear infinite;
+      }
+@keyframes lds-hourglass {
+	0% {
+	transform:rotate(0);
+	animation-timing-function:cubic-bezier(.55,.055,.675,.19)
+}
+50% {
+	transform:rotate(900deg);
+	animation-timing-function:cubic-bezier(.215,.61,.355,1)
+}
+100% {
+	transform:rotate(1800deg)
+}
+}
 </style>

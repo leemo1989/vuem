@@ -65,9 +65,8 @@ export default {
             })
         },
         playm(sid){
-            console.log(this.$store.state.playlist,this.$store.state.fullScreen)
-            this.$store.commit('ilist',sid)
-            console.log(this.$store.state.playlist,this.$store.state.fullScreen)
+            this.$store.dispatch('getsonginfo',sid)
+            //this.$store.dispatch('ilist',sid)
         }
     },
     mounted(){
