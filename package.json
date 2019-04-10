@@ -10,6 +10,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "element-ui": "^2.7.0",
+    "fastclick": "^1.0.6",
     "font-awesome": "^4.7.0",
     "mini-ui": "0.0.1-alpha",
     "mint-ui": "^2.2.13",

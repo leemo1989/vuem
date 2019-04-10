@@ -13,7 +13,7 @@
                     <h4>{{cinfo.author}}</h4>
                     <img :src="cinfo.pic_radio">
                 </div>
-                <div style="height: 300px;overflow: hidden;margin-bottom: 10px">{{clrc}}</div>
+                <div style="overflow: hidden;margin-bottom: 10px">{{clrc}}</div>
                     <div class="progress">
                         <span class="time time-l">{{format(currentTime)}}</span>
                         <div>=============================</div>
@@ -137,13 +137,6 @@ export default {
 
     }
 .player{
-      position: fixed;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      z-index: 150;
-    background: aliceblue;
 }
     .mini-player{
       display: flex;
