@@ -37,12 +37,13 @@
                     </div>
                 </div>
                 <audio controls :src="cinfo.file_link" ref="audio"
-                       @play="ready" @error="" @timeupdate="updateTime" @ended=""></audio>
+                       @play="ready" @timeupdate="updateTime"></audio>
             </div>
         </transition>
         <transition>
            <div class="mini-player" v-show="!fullScreen" @click="open">
-                {{this.$store.state.playlist}}
+				{{cinfo.title}}-{{cinfo.author}}
+				<button>list</button>
            </div>
         </transition>
     </div>
@@ -97,9 +98,8 @@ export default {
           return num
       },
         open(){
-            console.log('open')
+			this.$store.commit('cfull',true)
         },
-        ready(){},
         error(){},
         end(){},
         back(){
