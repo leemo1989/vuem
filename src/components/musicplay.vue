@@ -9,8 +9,8 @@
                     <div class="back">
                         <i class="fa fa-chevron-down fa-2x" @click="back"></i>
                     </div>
-                    <h3>{{cinfo.title}}</h3>
-                    <h4>{{cinfo.author}}</h4>
+                    <h4>{{cinfo.title}}</h4>
+                    <h5>{{cinfo.author}}</h5>
                     <div class="cd">
                         <img :src="cinfo.pic_radio">
                     </div>
@@ -200,12 +200,13 @@ export default {
 
     }
     .cd {
-        width: 100%;
-        height: 100%;
+        width: 85%;
+        height: 85%;
+        margin: 0 auto;
         box-sizing: border-box;
         border: 10px solid rgba(255, 255, 255, 0.1);
         border-radius: 50%;
-        animation: lds-hourglass 1.2s linear infinite;
+        animation: lds-hourglass 25s linear infinite;
     }
     .cd img {
         width: 100%;
@@ -222,14 +223,9 @@ export default {
 @keyframes lds-hourglass {
 	0% {
 	transform:rotate(0);
-	animation-timing-function:cubic-bezier(.55,.055,.675,.19)
-}
-50% {
-	transform:rotate(900deg);
-	animation-timing-function:cubic-bezier(.215,.61,.355,1)
-}
-100% {
-	transform:rotate(1800deg)
-}
+    }
+    100% {
+        transform:rotate(360deg)
+    }
 }
 </style>

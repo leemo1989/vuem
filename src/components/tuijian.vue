@@ -11,11 +11,7 @@
         </div>
         <h4 style="float:left"><i class="fa fa-calendar-check-o fa-fw"></i> 今日推荐</h4>
         <div style="clear:both"></div>
-        <div style="padding:0;margin:0">
-            <!--router-link tag="div" class="cardurl" :to="{name:'Musicplay',params:{songid:v.song_id}}" v-for="(v,index) in todayr.song_list" :key="index">
-                <img :src="v.pic_big" :alt="v.title">
-                <div>{{v.title}}</div>
-            </router-link-->
+        <div style="display:flex;flex-wrap: wrap;justify-content: space-around;width:100%;">
             <div class="cardurl" v-for="(v,index) in todayr.song_list" :key="index" @click="playm(v.song_id)">
                 <img :src="v.pic_big" :alt="v.title">
                 <div>{{v.title}}</div>
@@ -27,14 +23,16 @@
             <div class="flex-item " @click="ginfo(1)"><i class="fa fa-rss fa-fw"></i> 新歌榜</div>
             <div class="flex-item " @click="ginfo(24)"><i class="fa fa-reorder  fa-fw"></i> King榜</div>
         </div>
-        <div v-for="n in showinfo" style="height: 90px;margin:10px 0;text-align: left">
-          <div style="float:left;margin-right: 10px;">
-            <img :src="n.pic_small" slot="icon">
-          </div>
-          <div style="height: 100%;float:left">
-              <h5>{{n.author}}</h5>
-              <p style="font-size: 12px;color:#7B7B7B">{{n.title}}</p>
-          </div>
+        <div style="display: flex;flex-direction: column">
+            <div v-for="n in showinfo" style="height: 90px;margin:5px 0;text-align: left">
+              <div style="float:left;margin-right: 10px;">
+                <img :src="n.pic_small" slot="icon">
+              </div>
+              <div>
+                  <h5>{{n.author}}</h5>
+                  <p style="font-size: 12px;color:#7B7B7B;">{{n.title}}</p>
+              </div>
+            </div>
         </div>
     </div>
 </template>
@@ -97,15 +95,12 @@ export default {
     img{padding:0;margin:0}
     i{color:red}
     .cardurl {width:32%;
-        margin-right:5px;
-        overflow: hidden;
-        float:left;
-        overflow: hidden;
         height:170px;
         font-size:12px;
+        padding-bottom: 10px;
         }
     .cardurl img{
-        width: 127px;
+        width: 120px;
         height: 120px}
     .flex-container{
                 display:flex;
