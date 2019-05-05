@@ -7,7 +7,7 @@ import Search from '@/components/search'
 import Tuijian from '@/components/tuijian'
 import Morelist from '@/components/morelist'
 import Musicplay from '@/components/musicplay'
-
+import Rankdetail from '@/components/rankdetail'
 Vue.use(Router)
 
 export default new Router({
@@ -16,6 +16,11 @@ export default new Router({
         path:'/musicplay',
         name:"Musicplay",
         component: Musicplay,
+      },
+      {
+        path:'/rankdetail/:id',
+        name:"Rankdetail",
+        component: Rankdetail,
       },
       {
         path:'/',

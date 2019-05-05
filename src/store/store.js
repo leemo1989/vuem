@@ -8,12 +8,13 @@ const state = {
     playlist: [],
     currentIndex: -1, //当前播放索引
     singer: {},
+    currenttop:{},
 };
 const getters = {
     //当前播放音乐信息
     cinfo(state){
         return state.singer
-    }
+    },
 };
 const mutations ={
     cfull(state,s){
@@ -32,6 +33,9 @@ const mutations ={
             state.fullScreen = false
         }
         state.currentIndex+=1
+    },
+    ctop(state,item){
+        state.currenttop = item
     }
 };
 const actions = {

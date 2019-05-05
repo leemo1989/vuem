@@ -1,6 +1,6 @@
 <template>
     <div class="mlist">
-        <div v-for="(v,index) in bd" :key="index">
+        <div v-for="(v,index) in bd" :key="index" @click="selectItem(v)">
             <img width="100" height="100" :src="v.picUrl"/>
             <p v-for="z in v.songList">{{z.songname}}--{{z.singername}}</p>
         </div>
@@ -26,7 +26,13 @@
                     console.log(data,555)
                     this.bd=data.data.topList
                 })
-            }
+            },
+            selectItem(item){
+                this.$router.push({
+                    path: `/rankdetail/${item.id}`
+                })
+                this.$store.commit('ctop',item)
+            },
         }
     }
 </script>
