@@ -16,12 +16,17 @@
                     </div>
 
                 </div>
-                <div style="overflow: hidden;margin-bottom: 10px">{{clrc}}</div>
-                    <div class="progress">
-                        <span class="time time-l">{{format(currentTime)}}</span>
-                        <div>=============================</div>
-                        <span class="time time-l">{{format(cinfo.allTime)}}</span>
-                    </div>
+                <div style="overflow: hidden;margin-bottom: 50px">{{clrc}}</div>
+
+
+                <audio controls :src="cinfo.file_link" ref="audio"
+                       @play="ready" @timeupdate="updateTime">
+                </audio>
+                <div class="progress">
+                    <span class="time time-l">{{format(currentTime)}}</span>
+                    <div>=============================</div>
+                    <span class="time time-l">{{format(cinfo.allTime)}}</span>
+                </div>
                 <div class="scon">
                     <div class="scon1">
                         <i class="fa fa-random"></i>
@@ -30,7 +35,9 @@
                         <i class="fa fa-step-backward"></i>
                     </div>
                     <div class="scon1">
-                        <i class="fa fa-play" @click="togglePlaying"></i>
+                        <button style="border-radius: 100%;padding:10px;background: none">
+                            <i class="fa fa-play" @click="togglePlaying"></i>
+                        </button>
                     </div>
                     <div class="scon1">
                         <i class="fa fa-step-forward"></i>
@@ -39,19 +46,31 @@
                         <i class="fa fa-heart-o"></i>
                     </div>
                 </div>
-                <audio controls :src="cinfo.file_link" ref="audio"
-                       @play="ready" @timeupdate="updateTime"></audio>
             </div>
         </transition>
         <transition>
            <div class="mini-player" v-show="!fullScreen" @click="open">
                <div class="icon">
-                   <img width="40" heoght="40" :src="cinfo.pic_small">
+                   <img width="40" height="40" :src="cinfo.pic_small">
                </div>
-				{{cinfo.title}}-{{cinfo.author}}
-				<button @click="showlist">list</button>
+               <div style="margin-left:10px">
+                   <p>{{cinfo.title}}</p>
+                   <p>{{cinfo.author}}</p>
+               </div>
+               <div style="margin-left:120px">
+                    <button @click.stop="showlist"><i class="fa fa-play fa-fw"></i></button>
+                    <button @click.stop="showlist"><i class="fa fa-reorder fa-fw"></i></button>
+               </div>
+
            </div>
         </transition>
+                <div class="playlist" v-show="showFlag">
+                    <div v-for="v in playlist" class="pitem">
+                        {{v}} - 这里显示作者
+                        <button style="float: right;border: none"><i class="fa fa-times fa-fw"></i></button>
+                    </div>
+                    <div style="position:fixed;bottom:0;background: black;height: 60px;width: 100%" @click="showFlag=false">关闭</div>
+                </div>
         <mlist ref="mlist"></mlist>
     </div>
 </template>
@@ -67,6 +86,7 @@ export default {
             allTime:0,
             playlist:this.$store.state.playlist,
             clrc:'',
+            showFlag:false,
         };
     },
     components:{
@@ -85,6 +105,8 @@ export default {
     },
     methods:{
         showlist(){
+            console.log(this.playlist,444)
+            this.showFlag=true
             this.$refs.mlist.show()
         },
       ready() {
@@ -114,6 +136,7 @@ export default {
           return num
       },
         open(){
+            console.log('iopen,,,,,,,,,,,,,,,,,,')
 			this.$store.commit('cfull',true)
         },
         error(){},
@@ -146,14 +169,31 @@ export default {
     }
     .scon1{
         width:30em;
-        border:1px solid blue
+
     }
     .scon1 i{
-
+        color:white
     }
 .player{
 }
+.playlist{
+    display: flex;
+    position: fixed;
+    flex-direction: column;
+      left: 0;
+      bottom: 0;
+      z-index: 200;
+      width: 100%;
+      height: 50%;
+      background: deepskyblue;
+}
+.pitem{
+    width: 100%;
+    height: 30px;
+    text-align: left;
+}
     .mini-player{
+        color: white;
       display: flex;
       align-items: center;
       position: fixed;
@@ -162,7 +202,7 @@ export default {
       z-index: 180;
       width: 100%;
       height: 60px;
-      background: red }
+      background: black }
     .normal-player{
       position: fixed;
       left: 0;
