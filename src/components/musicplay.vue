@@ -7,10 +7,10 @@
                 </div>
                 <div class="mtop">
                     <div class="back">
-                        <i class="fa fa-chevron-down fa-2x" @click="back"></i>
+                        <i style="color:white" class="fa fa-chevron-down fa-2x" @click="back"></i>
                     </div>
-                    <h4>{{cinfo.title}}</h4>
-                    <h5>{{cinfo.author}}</h5>
+                    <h4><font color="white">{{cinfo.title}}</font></h4>
+                    <h5><font color="white">{{cinfo.author}}</font></h5>
                     <div class="cd">
                         <img :src="cinfo.pic_radio">
                     </div>
@@ -20,7 +20,7 @@
 
 
                 <audio controls :src="cinfo.file_link" ref="audio"
-                       @play="ready" @timeupdate="updateTime">
+                       @play="ready" @timeupdate="updateTime" style="display:none">
                 </audio>
                 <div class="progress">
                     <span class="time time-l">{{format(currentTime)}}</span>
@@ -35,9 +35,9 @@
                         <i class="fa fa-step-backward"></i>
                     </div>
                     <div class="scon1">
-                        <button style="border-radius: 100%;padding:10px;background: none">
-                            <i class="fa fa-play" @click="togglePlaying"></i>
-                        </button>
+                        <div style="border-radius: 50%;margin:0 auto;width: 55px;height: 55px;line-height:55px;background: none;border:2px solid white">
+                            <i :class="isplay?'fa fa-stop':'fa fa-play'" @click="togglePlaying"></i>
+                        </div>
                     </div>
                     <div class="scon1">
                         <i class="fa fa-step-forward"></i>
@@ -54,22 +54,32 @@
                    <img width="40" height="40" :src="cinfo.pic_small">
                </div>
                <div style="margin-left:10px">
-                   <p>{{cinfo.title}}</p>
-                   <p>{{cinfo.author}}</p>
+                   <font size="2px" color="#a9a9a9">{{cinfo.title}}</font>
+                   <br>
+                   <label><font color="#a9a9a9" size="2px" >{{cinfo.author}}</font></label>
                </div>
-               <div style="margin-left:120px">
-                    <button @click.stop="showlist"><i class="fa fa-play fa-fw"></i></button>
-                    <button @click.stop="showlist"><i class="fa fa-reorder fa-fw"></i></button>
+               <div style="margin-left:120px;display: flex;align-items: center;">
+                    <div style="margin-right:20px;border-radius: 50%;width: 25px;height:25px;line-height:25px;background: none;border:2px solid white">
+                        <i style="color:white" :class="isplay?'fa fa-stop':'fa fa-play'" @click="togglePlaying"></i>
+                    </div>
+                    <div>
+                       <div @click.stop="showlist">
+                           <i style="color:white" class="fa fa-list-ol"></i>
+                       </div>
+                    </div>
+
                </div>
 
            </div>
         </transition>
                 <div class="playlist" v-show="showFlag">
-                    <div v-for="v in playlist" class="pitem">
-                        {{v}} - 这里显示作者
-                        <button style="float: right;border: none"><i class="fa fa-times fa-fw"></i></button>
+                    <div v-for="(v,index) in playlist" class="pitem">
+                        {{index+1}}.    <font size="2px">{{v.title}}</font> - <font color="#888888" size="2px">{{v.author}}</font>
+                        <button style="float:right;margin-right:10px;border: none;background: none">
+                            <i class="fa fa-times fa-fw"></i>
+                        </button>
                     </div>
-                    <div style="position:fixed;bottom:0;background: black;height: 60px;width: 100%" @click="showFlag=false">关闭</div>
+                    <div style="position:fixed;bottom:0;left:0;background:#2c3e50;height: 60px;width: 100%" @click="showFlag=false">关闭</div>
                 </div>
         <mlist ref="mlist"></mlist>
     </div>
@@ -87,6 +97,7 @@ export default {
             playlist:this.$store.state.playlist,
             clrc:'',
             showFlag:false,
+            isplay:false,
         };
     },
     components:{
@@ -116,7 +127,12 @@ export default {
       //控制播放状态
       togglePlaying(){
           console.log(222)
-          this.$refs.audio.play()
+          this.isplay =!this.isplay
+          if(this.isplay){
+              this.$refs.audio.play()
+          }else{
+              this.$refs.audio.pause()
+          }
           if(!this.songReady){
               return
           }
@@ -177,6 +193,8 @@ export default {
 .player{
 }
 .playlist{
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
     display: flex;
     position: fixed;
     flex-direction: column;
@@ -185,12 +203,14 @@ export default {
       z-index: 200;
       width: 100%;
       height: 50%;
-      background: deepskyblue;
+      background: #1e1e1e;
+    color:#dedede;
 }
 .pitem{
     width: 100%;
     height: 30px;
     text-align: left;
+    padding:10px;
 }
     .mini-player{
         color: white;
@@ -254,6 +274,9 @@ export default {
         border-radius: 50%;
     }
       .icon {
+          margin-left:10px;
+          border:none;
+          overflow: hidden;
           flex: 0 0 40px;
           width: 40px;
           padding: 0 10px 0 20px img;

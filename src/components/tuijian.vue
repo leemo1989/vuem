@@ -12,7 +12,7 @@
         <h4 style="float:left"><i class="fa fa-calendar-check-o fa-fw"></i> 今日推荐</h4>
         <div style="clear:both"></div>
         <div style="display:flex;flex-wrap: wrap;justify-content: space-around;width:100%;">
-            <div class="cardurl" v-for="(v,index) in todayr.song_list" :key="index" @click="playm(v.song_id)">
+            <div class="cardurl" v-for="(v,index) in todayr.song_list" :key="index" @click="playm(v)">
                 <img :src="v.pic_big" :alt="v.title">
                 <div>{{v.title}}</div>
             </div>
