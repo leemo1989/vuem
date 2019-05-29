@@ -1,30 +1,31 @@
 <template>
-  <scroll class="wrapper"
-          :data="data1"
-          :pulldown="pulldown"
-          @pulldown="loadData">
-    <ul class="content">
-      <li v-for="(item,index) in data1" :key="index" style="border:1px solid red" @click="singerdetail">
-          <h5>{{item.Fsinger_name}}</h5>
-      </li>
-    </ul>
-    <div class="loading-wrapper"></div>
-  </scroll>
+  <div class="geshou">
+    <scroll ref="scroll" class="tuijiancontent">
+      <div>
+        <ul class="content">
+          <li v-for="(item,index) in data1" :key="index" style="border:1px solid red" @click="singerdetail">
+              <h5>{{item.Fsinger_name}}</h5>
+          </li>
+        </ul>
+        <div class="loading-wrapper"></div>
+      </div>
+    </scroll>
+  </div>
 </template>
 <script>
-import scroll from '@/components/scroll.vue'
+import Scroll from '@/components/scroll'
 import {getData} from '@/api/singer'
   export default {
       name:'Geshou',
-      components:{
-          scroll
-      },
     data() {
       return {
         data1: [],
         pulldown: true
       }
     },
+        components:{
+            Scroll
+        },
     created() {
       this.loadData()
     },
@@ -43,3 +44,11 @@ import {getData} from '@/api/singer'
     }
   }
 </script>
+<style type="text/css">
+    .geshou{
+      position: fixed;
+      width: 100%;
+      top: 98px;
+      bottom: 0;
+    }
+</style>

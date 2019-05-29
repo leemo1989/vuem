@@ -7,10 +7,11 @@
                 </div>
                 <div class="mtop">
                     <div class="back">
-                        <i style="color:white" class="fa fa-chevron-down fa-2x" @click="back"></i>
+                        <i style="color:white;position: absolute;top:10px;left:6px;z-index:50;" class="fa fa-chevron-down fa-2x" @click="back"></i>
+
                     </div>
-                    <h4><font color="white">{{cinfo.title}}</font></h4>
-                    <h5><font color="white">{{cinfo.author}}</font></h5>
+                        <h3>{{cinfo.title}}</h3>
+                        <h5>{{cinfo.author}}</h5>
                     <div class="cd">
                         <img :src="cinfo.pic_radio">
                     </div>
@@ -22,28 +23,30 @@
                 <audio controls :src="cinfo.file_link" ref="audio"
                        @play="ready" @timeupdate="updateTime" style="display:none">
                 </audio>
-                <div class="progress">
-                    <span class="time time-l">{{format(currentTime)}}</span>
-                    <div>=============================</div>
-                    <span class="time time-l">{{format(cinfo.allTime)}}</span>
-                </div>
-                <div class="scon">
-                    <div class="scon1">
-                        <i class="fa fa-random"></i>
+                <div class="mbottom">
+                    <div class="progress">
+                        <span class="time time-l">{{format(currentTime)}}</span>
+                        <div>=============================</div>
+                        <span class="time time-l">{{format(cinfo.allTime)}}</span>
                     </div>
-                    <div class="scon1">
-                        <i class="fa fa-step-backward"></i>
-                    </div>
-                    <div class="scon1">
-                        <div style="border-radius: 50%;margin:0 auto;width: 55px;height: 55px;line-height:55px;background: none;border:2px solid white">
-                            <i :class="isplay?'fa fa-stop':'fa fa-play'" @click="togglePlaying"></i>
+                    <div class="scon">
+                        <div class="scon1">
+                            <i class="fa fa-random"></i>
                         </div>
-                    </div>
-                    <div class="scon1">
-                        <i class="fa fa-step-forward"></i>
-                    </div>
-                    <div class="scon1">
-                        <i class="fa fa-heart-o"></i>
+                        <div class="scon1">
+                            <i class="fa fa-step-backward"></i>
+                        </div>
+                        <div class="scon1">
+                            <div style="border-radius: 50%;margin:0 auto;width: 55px;height: 55px;line-height:55px;background: none;border:2px solid white">
+                                <i :class="isplay?'fa fa-stop':'fa fa-play'" @click="togglePlaying"></i>
+                            </div>
+                        </div>
+                        <div class="scon1">
+                            <i class="fa fa-step-forward"></i>
+                        </div>
+                        <div class="scon1">
+                            <i class="fa fa-heart-o"></i>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -63,8 +66,8 @@
                         <i style="color:white" :class="isplay?'fa fa-stop':'fa fa-play'" @click="togglePlaying"></i>
                     </div>
                     <div>
-                       <div @click.stop="showlist">
-                           <i style="color:white" class="fa fa-list-ol"></i>
+                       <div @click.stop="showlist" style="color:white;font-size:25px;position: absolute;right:15px;top:15px">
+                           <i class="fa fa-list-ol"></i>
                        </div>
                     </div>
 
@@ -79,7 +82,9 @@
                             <i class="fa fa-times fa-fw"></i>
                         </button>
                     </div>
-                    <div style="position:fixed;bottom:0;left:0;background:#2c3e50;height: 60px;width: 100%" @click="showFlag=false">关闭</div>
+                    <div style="position:fixed;bottom:0;left:0;height: 60px;width: 100%;text-align: center" @click="showFlag=false">
+                        <h3>关闭</h3>
+                    </div>
                 </div>
         <mlist ref="mlist"></mlist>
     </div>
@@ -181,7 +186,8 @@ export default {
     .scon{
         display:flex;
         height:50px;
-        align-items: center
+        align-items: center;
+        text-align: center;
     }
     .scon1{
         width:30em;
@@ -191,6 +197,12 @@ export default {
         color:white
     }
 .player{
+
+}
+.mbottom{
+    position: absolute;
+    bottom: 50px;
+    width: 100%;
 }
 .playlist{
     border-top-left-radius: 10px;
@@ -210,9 +222,10 @@ export default {
     width: 100%;
     height: 30px;
     text-align: left;
-    padding:10px;
+    padding:15px;
 }
     .mini-player{
+        text-align: center;
         color: white;
       display: flex;
       align-items: center;
@@ -222,7 +235,9 @@ export default {
       z-index: 180;
       width: 100%;
       height: 60px;
-      background: black }
+      background: black;
+        box-shadow:2px 2px 5px #333333;
+    }
     .normal-player{
       position: fixed;
       left: 0;
@@ -230,7 +245,7 @@ export default {
       top: 0;
       bottom: 0;
       z-index: 150;
-      background: cornflowerblue;
+      background: #222;
     }
     .background{
         position: absolute;
@@ -244,12 +259,23 @@ export default {
     }
     .mtop{
         position: relative;
-        margin-bottom: 25px;
+        margin-bottom: 35px;
+        padding-top:10px;
     }
     .back{
         position: absolute;
         top:-5px;
         left:12px;
+    }
+    .mtop h3,.mtop h5{
+    width: 70%;
+    margin: 0 auto;
+    line-height: 20px;
+    text-align: center;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    color: #f1f1f1;
     }
     .progress{
         display: flex;
@@ -263,6 +289,7 @@ export default {
         width: 85%;
         height: 85%;
         margin: 0 auto;
+        margin-top:80px;
         box-sizing: border-box;
         border: 10px solid rgba(255, 255, 255, 0.1);
         border-radius: 50%;
