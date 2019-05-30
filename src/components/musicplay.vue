@@ -8,7 +8,6 @@
                 <div class="mtop">
                     <div class="back">
                         <i style="color:white;position: absolute;top:10px;left:6px;z-index:50;" class="fa fa-chevron-down fa-2x" @click="back"></i>
-
                     </div>
                         <h3>{{cinfo.title}}</h3>
                         <h5>{{cinfo.author}}</h5>

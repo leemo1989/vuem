@@ -6,9 +6,11 @@
           <li v-for="(item,index) in data1" :key="index" @click="singerdetail">
               <h5>{{item.title}}</h5>
 			  <ul class="bl">
-				<li v-for="z in item.items" style="border-bottom:1px solid #f0f0f0;line-height:40px">
-					<div style="width:40px;height:40px;border:1px solid;float:left;margin-right:20px"></div>
-					{{z.name}}-{{z.id}}
+				<li v-for="z in item.items" style="border-bottom:1px solid #f0f0f0;line-height:50px;margin:5px 0">
+					<div>
+                      <img :src="z.avatar" style="width:50px;height:50px;float:left;margin-right:20px">
+                    </div>
+					{{z.name}}
 					<div style="clear:both"></div>
 				</li>
 			  </ul>
@@ -44,7 +46,7 @@ import {getData} from '@/api/singer'
 				}
 				mlist.forEach((item,index) =>{
 					let key = item.Findex
-					console.log(key)
+
 					if (!singerlist[key]){
 						singerlist[key] ={
 							title:key,
@@ -53,10 +55,11 @@ import {getData} from '@/api/singer'
 					}
 					singerlist[key].items.push({
 						name:item.Fsinger_name,
-						id:item.Fsinger_id,
-						//avatar = `https://y.gtimg.cn/music/photo_new/T001R300x300M000${id}.jpg?max_age=2592000`
+						id:item.Fsinger_mid,
+						avatar:`https://y.gtimg.cn/music/photo_new/T001R300x300M000${item.Fsinger_mid}.jpg?max_age=2592000`
 					})
 				})
+              					console.log(singerlist)
 				//sorted
 				return singerlist
 			},
