@@ -22,6 +22,9 @@
         <router-link tag="div" class="tab-item" to="/geshou">
           <span>歌手</span>
         </router-link>
+        <router-link tag="div" class="tab-item" to="/blog">
+          <span>心情</span>
+        </router-link>
       </div>
     </div>
 </template>

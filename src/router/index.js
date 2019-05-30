@@ -5,6 +5,7 @@ import Geshou from '@/components/geshou'
 import Bangdan from '@/components/bangdan'
 import Search from '@/components/search'
 import Tuijian from '@/components/tuijian'
+import Blog from '@/components/blog'
 import Morelist from '@/components/morelist'
 import Musicplay from '@/components/musicplay'
 import Rankdetail from '@/components/rankdetail'
@@ -46,6 +47,10 @@ export default new Router({
       {
         path:'/search',
         component: Search,
+      },
+      {
+        path:'/blog',
+        component: Blog,
       },
       {
         path:'/morelist',
