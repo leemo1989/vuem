@@ -9,6 +9,7 @@ import Blog from '@/components/blog'
 import Morelist from '@/components/morelist'
 import Musicplay from '@/components/musicplay'
 import Rankdetail from '@/components/rankdetail'
+import Blogdetail from '@/components/blogdetail'
 Vue.use(Router)
 
 export default new Router({
@@ -48,10 +49,14 @@ export default new Router({
         path:'/search',
         component: Search,
       },
-      {
-        path:'/blog',
-        component: Blog,
-      },
+        {
+          path: '/blog',
+          component: Blog,
+        },
+        {
+          path: '/blogdetail/:id',
+          component: Blogdetail,
+        },
       {
         path:'/morelist',
         name:"Morelist",
