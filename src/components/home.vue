@@ -5,7 +5,7 @@
                 <i class="fa fa-bars fa-1x text"></i>
             </div>
             <div class="item1">
-                <h2 style="font-weight: 700;color:#f1f1f1;letter-spacing: 3px">SoloMusic</h2>
+                <h2 style="font-weight: 700;color:#f1f1f1;letter-spacing: 3px">【DIE】Music</h2>
             </div>
             <div class="item">
                 <router-link to="/search"><i class="fa fa-search fa-1x text"></i></router-link>
