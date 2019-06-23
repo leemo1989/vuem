@@ -69,7 +69,7 @@ export default {
             })
         },
         playm(sid){
-            this.$store.dispatch('getsonginfo',sid)
+            this.$store.dispatch('getsonginfo',{sid:sid,q:null})
             //this.$store.dispatch('ilist',sid)
         }
     },

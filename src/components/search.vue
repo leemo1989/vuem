@@ -13,7 +13,7 @@
             <scroll ref="scroll" class="tuijiancontent">
                 <div>
                     <div>
-                    <div v-for="v in sresult.list">
+                    <div v-for="v in sresult.list" @click="playm(v.songmid,v.albumid,v.albumname,v.songname)">
                         {{v.songname}}-{{v.albumname}}<br>{{slist(v.singer)}}
                         <hr>
                     </div>
@@ -43,26 +43,31 @@ export default {
 		Scroll
 	},
 	methods:{
+        playm(sid,aid,aname,sname){
+            console.log(sid)
+            this.$store.dispatch('getsonginfo',{sid:sid,q:'yes',aid:aid,aname:aname,sname:sname})
+        },
+
 		_gethotkey(){
             const url ='/qqmusic/splcloud/fcgi-bin/gethotkey.fcg'
             getData(url).then(data=>{
-                console.log(data,555)
+                //console.log(data,555)
                 this.hotkey=data.data.hotkey
             })
         },
         slist(singer){
             var z=[]
             for(let o of singer){
-                console.log(o.name)
+                //console.log(o.name)
                 z.push(o.name)
             }
             return z.toString()
         },
         searchinfo(){
             if(this.input4){
-                const url ='/qqmusic/soso/fcgi-bin/client_search_cp?aggr=1&format=json&cr=1&flag_qc=0&p=1&n=30&w='+this.input4
+                const url ='/qqmusic/soso/fcgi-bin/client_search_cp?aggr=1&format=json&cr=1&flag_qc=0&p=1&n=300&w='+this.input4
                 getData(url).then(data=>{
-                    console.log(data)
+                    //console.log(data)
                     this.sresult=data.data.song
                     console.log(this.sresult,6666)
                 })

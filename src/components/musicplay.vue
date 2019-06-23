@@ -3,7 +3,7 @@
         <transition>
             <div v-show="fullScreen" class="normal-player">
                 <div class="background">
-                  <img width="100%" height="100%" :src="cinfo.pic_radio">
+                  <img width="100%" height="100%" :src="cinfo.pic">
                 </div>
                 <div class="mtop">
                     <div class="back">
@@ -12,21 +12,21 @@
                         <h3>{{cinfo.title}}</h3>
                         <h5>{{cinfo.author}}</h5>
                     <div class="cd">
-                        <img :src="cinfo.pic_radio">
+                        <img :src="cinfo.pic">
                     </div>
 
                 </div>
                 <div style="overflow: hidden;margin-bottom: 50px">{{clrc}}</div>
 
 
-                <audio controls :src="cinfo.file_link" ref="audio"
+                <audio controls :src="cinfo.file_link" ref="audio" autoplay
                        @play="ready" @timeupdate="updateTime" style="display:none">
                 </audio>
                 <div class="mbottom">
                     <div class="progress">
                         <span class="time time-l">{{format(currentTime)}}</span>
                         <div>=============================</div>
-                        <span class="time time-l">{{format(cinfo.allTime)}}</span>
+                        <span class="time time-l">{{format(allTime)}}</span>
                     </div>
                     <div class="scon">
                         <div class="scon1">
@@ -53,7 +53,7 @@
         <transition>
            <div class="mini-player" v-show="!fullScreen" @click="open">
                <div class="icon">
-                   <img width="40" height="40" :src="cinfo.pic_small">
+                   <img width="40" height="40" :src="cinfo.pic">
                </div>
                <div style="margin-left:10px">
                    <font size="2px" color="#a9a9a9">{{cinfo.title}}</font>
@@ -101,7 +101,7 @@ export default {
             playlist:this.$store.state.playlist,
             clrc:'',
             showFlag:false,
-            isplay:false,
+            isplay:true,
         };
     },
     components:{
@@ -127,6 +127,7 @@ export default {
       ready() {
           console.log(888)
           this.songReady = false
+          this.allTime=this.$refs.audio.duration
       },
       //控制播放状态
       togglePlaying(){

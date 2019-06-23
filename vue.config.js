@@ -17,6 +17,14 @@ module.exports = {
                     "^/qqmusic":""
                 }
             },
+            "/ws":{
+                target:"https://ws.stream.qqmusic.qq.com",
+                ws:true,
+                changeOrigin: true,
+                pathRewrite:{
+                    "^/ws":""
+                }
+            },
         },
         disableHostCheck:true
     }
