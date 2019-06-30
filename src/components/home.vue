@@ -1,11 +1,11 @@
 <template>
     <div>
         <div class="header">
-            <div class="item">
+            <div class="item" @click="per">
                 <i class="fa fa-bars fa-1x text"></i>
             </div>
             <div class="item1">
-                <h2 style="font-weight: 700;color:#f1f1f1;letter-spacing: 3px">【DIE】Music</h2>
+                <h4 style="font-weight: 700;color:#f1f1f1;letter-spacing: 3px">【DIE】Music</h4>
             </div>
             <div class="item">
                 <router-link to="/search"><i class="fa fa-search fa-1x text"></i></router-link>
@@ -35,6 +35,13 @@ export default {
             tselect:'2'
         }
 
+    },
+    methods:{
+        per(){
+            this.$router.push({
+				path: `/perinfo/`
+            })
+        }
     }
 }
 </script>

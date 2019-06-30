@@ -6,11 +6,9 @@
                   <img width="100%" height="100%" :src="cinfo.pic">
                 </div>
                 <div class="mtop">
-                    <div class="back">
-                        <i style="color:white;position: absolute;top:10px;left:6px;z-index:50;" class="fa fa-chevron-down fa-2x" @click="back"></i>
-                    </div>
-                        <h3>{{cinfo.title}}</h3>
-                        <h5>{{cinfo.author}}</h5>
+                    <div class="back" @click="back"><i class="fa fa-chevron-left"></i></div>
+                    <h3>{{cinfo.title}}</h3>
+                    <h5>{{cinfo.author}}</h5>
                     <div class="cd">
                         <img :src="cinfo.pic">
                     </div>
@@ -25,7 +23,11 @@
                 <div class="mbottom">
                     <div class="progress">
                         <span class="time time-l">{{format(currentTime)}}</span>
-                        <div>=============================</div>
+                        <div style="height: 5px;background: #1DB2B6;width: 100%"
+                             @touchstart.prevent="progressTouchStart"
+                        >
+                            <div :style="processbar"></div>
+                        </div>
                         <span class="time time-l">{{format(allTime)}}</span>
                     </div>
                     <div class="scon">
@@ -102,6 +104,9 @@ export default {
             clrc:'',
             showFlag:false,
             isplay:true,
+            processbar:{
+                height: '5px',background: 'red',width: '55.555%'
+            }
         };
     },
     components:{
@@ -119,13 +124,16 @@ export default {
         console.log('start--------------------')
     },
     methods:{
+        progressTouchStart(event){
+            console.log('event',event.touches[0].pageX)
+        },
         showlist(){
             console.log(this.playlist,444)
             this.showFlag=true
             this.$refs.mlist.show()
         },
       ready() {
-          console.log(888)
+          console.log(888,this.$refs.audio.duration)
           this.songReady = false
           this.allTime=this.$refs.audio.duration
       },
@@ -167,7 +175,8 @@ export default {
         },
         updateTime(e) {
             this.currentTime = e.target.currentTime //时间戳
-          console.log(e.target.currentTime) //时间戳
+          //console.log(e.target.currentTime,this.currentTime/this.allTime*100) //时间戳
+            this.processbar.width=this.currentTime/this.allTime*100+'%'
         },
     },
     computed:{
@@ -263,9 +272,10 @@ export default {
         padding-top:10px;
     }
     .back{
-        position: absolute;
-        top:-5px;
-        left:12px;
+        position: fixed;
+        top:20px;
+        left:20px;
+        color:white;
     }
     .mtop h3,.mtop h5{
     width: 70%;

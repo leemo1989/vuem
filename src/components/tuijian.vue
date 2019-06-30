@@ -28,8 +28,8 @@
                       <div style="float:left;margin-right: 10px;">
                         <img :src="n.pic_small" slot="icon">
                       </div>
-                      <div>
-                          <h5>{{n.author}}</h5>
+                      <div style="vertical-align: middle;line-height: 40px">
+                          <span>{{n.author}}</span>
                           <p style="font-size: 12px;color:#7B7B7B;">{{n.title}}</p>
                       </div>
                     </div>

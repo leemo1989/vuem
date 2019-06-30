@@ -10,10 +10,11 @@ import Morelist from '@/components/morelist'
 import Musicplay from '@/components/musicplay'
 import Rankdetail from '@/components/rankdetail'
 import Blogdetail from '@/components/blogdetail'
+import Perinfo from '@/components/perinfo'
 Vue.use(Router)
 
 export default new Router({
-  routes: [
+    routes: [
       {
         path:'/musicplay',
         name:"Musicplay",
@@ -52,6 +53,10 @@ export default new Router({
         {
           path: '/blog',
           component: Blog,
+        },
+        {
+          path: '/perinfo',
+          component: Perinfo,
         },
         {
           path: '/blogdetail/:id',

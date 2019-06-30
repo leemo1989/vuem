@@ -1,9 +1,11 @@
 <template>
     <div>
         <div>
-          <el-input placeholder="请输入内容" v-model="input4" size="medium">
-            <template slot="append"><el-button slot="append" icon="el-icon-search" @click="searchinfo"></el-button></template>
-          </el-input>
+            <input v-model="input4"
+                   placeholder="搜索歌手或歌曲"
+                   type="search"
+                   style="width:90%;padding:5px;border:none;border-bottom: 1px solid #7B7B7B"></input>
+            <button @click="searchinfo" style="padding:5px 12px;border-left:none;border-right: none"><i class="fa fa-search"></i></button>
         </div>
         <div v-show="!input4">
             <h4 class="title">热门搜索</h4>
@@ -34,6 +36,7 @@ export default {
             hotkey:[],
             input4:'',
             sresult:{},
+            query:'',
         };
     },
 	created(){
