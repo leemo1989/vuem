@@ -27,5 +27,7 @@ npm run lint
 
 ### Customize configuration
 效果图如下
-![image](https://github.com/leemo1989/vuem/blob/master/src/assets/sy1.gif)![image](https://github.com/leemo1989/vuem/blob/master/src/assets/sy.gif)
+![image](https://github.com/leemo1989/vuem/blob/master/src/assets/sy1.gif)
+
+![image](https://github.com/leemo1989/vuem/blob/master/src/assets/sy.gif)
 
