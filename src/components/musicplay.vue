@@ -23,10 +23,11 @@
                 <div class="mbottom">
                     <div class="progress">
                         <span class="time time-l">{{format(currentTime)}}</span>
-                        <div style="height: 5px;background: #1DB2B6;width: 100%"
+                        <div style="height: 1px;background: #e3e3e3;width: 100%;margin:0 8px;box-shadow: 0 5px 5px rgba(0,0,0,0.6);"
                              @touchstart.prevent="progressTouchStart"
                         >
-                            <div :style="processbar"></div>
+                            <div :style="processbar">
+                            </div>
                         </div>
                         <span class="time time-l">{{format(allTime)}}</span>
                     </div>
@@ -54,36 +55,30 @@
         </transition>
         <transition>
            <div class="mini-player" v-show="!fullScreen" @click="open">
-               <div class="icon">
+               <div class="icon" style="width:30%">
                    <img width="40" height="40" :src="cinfo.pic">
                </div>
-               <div style="margin-left:10px">
+               <div style="margin-left:10px;width:65%">
                    <font size="2px" color="#a9a9a9">{{cinfo.title}}</font>
                    <br>
                    <label><font color="#a9a9a9" size="2px" >{{cinfo.author}}</font></label>
                </div>
-               <div style="margin-left:120px;display: flex;align-items: center;">
-                    <div style="margin-right:20px;border-radius: 50%;width: 25px;height:25px;line-height:25px;background: none;border:2px solid white">
-                        <i style="color:white" :class="isplay?'fa fa-stop':'fa fa-play'" @click="togglePlaying"></i>
-                    </div>
-                    <div>
-                       <div @click.stop="showlist" style="color:white;font-size:25px;position: absolute;right:15px;top:15px">
-                           <i class="fa fa-list-ol"></i>
-                       </div>
-                    </div>
-
+                <div style="margin-right:20px;text-align:center;border-radius: 50%;width: 25px;height:25px;line-height:25px;background: none;border:2px solid white">
+                    <i style="color:white" :class="isplay?'fa fa-stop':'fa fa-play'" @click="togglePlaying"></i>
+                </div>
+               <div @click.stop="showlist" style="color:white;font-size:25px;">
+                   <i class="fa fa-list-ol"></i>
                </div>
-
            </div>
         </transition>
                 <div class="playlist" v-show="showFlag">
                     <div v-for="(v,index) in playlist" class="pitem">
                         {{index+1}}.    <font size="2px">{{v.title}}</font> - <font color="#888888" size="2px">{{v.author}}</font>
-                        <button style="float:right;margin-right:10px;border: none;background: none">
+                        <button style="float:right;margin-right:20px;border: none;background: none;color:white">
                             <i class="fa fa-times fa-fw"></i>
                         </button>
                     </div>
-                    <div style="position:fixed;bottom:0;left:0;height: 60px;width: 100%;text-align: center" @click="showFlag=false">
+                    <div style="text-align: center;position:absolute;bottom: 0;width: 100%;background: #1e1e1e" @click="showFlag=false">
                         <h3>关闭</h3>
                     </div>
                 </div>
@@ -105,7 +100,12 @@ export default {
             showFlag:false,
             isplay:true,
             processbar:{
-                height: '5px',background: 'red',width: '55.555%'
+                height: '1px',
+                background: '#ff1170',
+                width:'',
+                'text-align': 'right',
+                position:'absolute',
+                'box-shadow': '0 5px 5px rgba(0,0,0,0.6)'
             }
         };
     },
@@ -223,7 +223,8 @@ export default {
       bottom: 0;
       z-index: 200;
       width: 100%;
-      height: 50%;
+      height: 300px;
+    overflow: hidden;
       background: #1e1e1e;
     color:#dedede;
 }
@@ -234,7 +235,6 @@ export default {
     padding:15px;
 }
     .mini-player{
-        text-align: center;
         color: white;
       display: flex;
       align-items: center;
@@ -291,8 +291,9 @@ export default {
         display: flex;
         align-items: center;
         width: 80%;
-        margin: 0px auto;
-        padding: 10px 0
+        margin: 15px auto;
+        padding: 10px 0;
+        color: #7B7B7B;
 
     }
     .cd {
