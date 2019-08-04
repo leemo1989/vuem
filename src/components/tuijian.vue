@@ -75,7 +75,7 @@ export default {
     },
     mounted(){
         this.ginfo(2)
-        var url = this.HOST +"/v1/restserver/ting?method=baidu.ting.billboard.billList&type=1&size=6&offset=0"
+        var url = this.HOST +"/v1/restserver/ting?method=baidu.ting.billboard.billList&type=2&size=6&offset=0"
         this.$axios.get(url)
             .then(res=>{
                 console.log(res.data)
